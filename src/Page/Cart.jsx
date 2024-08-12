@@ -61,4 +61,4 @@ function Cart({ cartItems, onRemoveFromCart }) {
   );
 }
 
-export default Cart;
+export default Cart

@@ -34,7 +34,7 @@ function Shop() {
       setLoadingProducts(false);
     }
   };
-
+console.log(fetchAllProducts);
   useEffect(() => {
     fetchAllProducts();
     fetchAllCategory();
@@ -50,12 +50,12 @@ function Shop() {
   
 
   return (
-    <div className='w-full max-w-screen-lg mx-auto p-4'>
+    <div className='w-full max-w-screen-lg mx-auto p-5'>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
         <div className='col-span-2'>
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
-            {allData.map((product) => (
-              <div key={product.id} className='w-full h-auto border p-4'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
+            {allData.map((product,index) => (
+              <div key={index} className='w-full h-auto border p-6'>
                 <h1 className='text-lg font-bold'>${product.price}</h1>
                 <p className='text-md'>{product.title}</p>
                 <img src={product.image} alt={product.title} className='w-full h-auto object-cover' />
@@ -64,7 +64,7 @@ function Shop() {
           </div>
         </div>
         <div className='border p-4'>
-          <h2 className='text-xl font-semibold mb-2'>Categories</h2>
+          <h2 className='text-xl font-semibold mb-4'>Categories</h2>
           {category.map((item, index) => (
             <div key={index} className='p-2 border-b'>
               {item}
