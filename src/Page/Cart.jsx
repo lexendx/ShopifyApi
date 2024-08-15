@@ -7,11 +7,14 @@ function Cart() {
     return saved ? JSON.parse(saved) : [];
   });
 
-  const removeItem = (index) => {
-    const updatedItems = cartItems.filter((_, i) => i !== index);
+  const removeItem = (id) => {
+    const updatedItems = cartItems.filter(item=> item.id !== id);
     setCartItems(updatedItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedItems));
   };
+  const totalAmount = cartItems.reduce((acc, item) => acc + (item.price*item.quantity), 0);
+  const totalItems = cartItems.reduce((acc,item)=>acc+item.quantity,0);
+  console.log(cartItems);
 
   return (
     <div className="flex  ">
@@ -36,10 +39,10 @@ function Cart() {
                        {item.description.length>20 ? item.description.substring(0,70) + "...":item.description}
                      </p>
                      <div className="flex">
-                       <p className="text-green-600 ml-3 font-bold mt-14">{item.price}</p>
+                       <p className="text-green-600 ml-3 font-bold mt-14">${item.price}</p>
                        <AiFillDelete
                        className="mt-14 text-2xl ml-[350px] bg-orange-500 cursor-pointer hover:scale-105 rounded-full "
-                       onClick={()=>onRemoveFromCart(item.id)} />
+                       onClick={()=>removeItem(item.id)} />
    
                      </div>
                    </div>
