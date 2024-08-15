@@ -1,7 +1,7 @@
 import React from 'react';
 
 function AddToCart({ product, cartItems, handleAddToCart }) {
-  const isInCart = cartItems.includes(product);
+  const isInCart = cartItems.some(item => item.id === product.id);
 
   return (
     <button onClick={() => handleAddToCart(product)}

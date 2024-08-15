@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from 'react';
-
+import AddToCart from '../Component/AddToCart';
 function Shop() {
   const [allData, setAllData] = useState([]);
   const [category, setCategory] = useState([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [error, setError] = useState(null);
+  const [cartItems, setCartItems] = useState(() => {
+    const saved = localStorage.getItem("cartItems");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+useEffect (()=>{
+  localStorage.setItem("cartItems",JSON.stringify(cartItems));
+
+},[cartItems]);
+
 
   const fetchAllCategory = async () => {
     try {
@@ -40,6 +50,16 @@ console.log(fetchAllProducts);
     fetchAllCategory();
   }, []);
 
+  const handleAddToCart = (product) => {
+    setCartItems(prevItems => {
+      if (prevItems.includes(product)) {
+        return prevItems.filter(item => item !== product);
+      } else {
+        return [...prevItems, product];
+      }
+    });
+  };
+
   if (loadingProducts || loadingCategories) {
     return <div className="text-center">Loading...</div>;
   }
@@ -51,22 +71,25 @@ console.log(fetchAllProducts);
 
   return (
     <div className='w-full max-w-screen-lg mx-auto p-5'>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+      <div className='bg-blue-100 grid grid-cols-1 md:grid-cols-3 gap-5'>
         <div className='col-span-2'>
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 '>
             {allData.map((product,index) => (
-              <div key={index} className='w-full h-auto border p-6'>
-                <h1 className='text-lg font-bold'>${product.price}</h1>
+              <div key={index} className='w-full h-auto rounded-xl p-6 border border-black '>
+                
                 <p className='text-md'>{product.title}</p>
                 <img src={product.image} alt={product.title} className='w-full h-auto object-cover' />
+                <h1 className='text-lg font-bold'>${product.price}</h1>
+                <AddToCart product={product} cartItems={cartItems} handleAddToCart={handleAddToCart} />
               </div>
             ))}
+            
           </div>
         </div>
-        <div className='border p-4'>
-          <h2 className='text-xl font-semibold mb-4'>Categories</h2>
+        <div className='border p-5'>
+          <h2 className='text-xl font-bold mb-8'>Categories</h2>
           {category.map((item, index) => (
-            <div key={index} className='p-2 border-b'>
+            <div key={index} className = "p-4 border b bg-orange-300">
               {item}
             </div>
           ))}

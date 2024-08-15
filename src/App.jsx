@@ -11,19 +11,13 @@ function App() {
   
   return (
     <div>
-         <Navbar path="/" element={<Navbar/>}/>
-      <Routes>
-        <Route
-          path="/"
-          element={<Shop />}
-        />
-       <Route path="/"
-       element={<Cart/>}/>
 
-       <Route path="/"
-       element={<Admin/>}/>
-       <Route path="/"
-       element={<Navbar/>}/>
+      {/* navbar ko common krna hai isliye routes ke bahar hai  */}
+      <Navbar path="/" element={<Navbar/>}/>
+      <Routes>
+        <Route path="/" element={<Shop />} />
+        <Route path="/cart" element={<Cart/>} />
+        <Route path="/admin" element={<Admin/>} /> 
       </Routes>
     </div>
   );
