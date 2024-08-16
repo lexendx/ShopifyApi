@@ -60,9 +60,9 @@ function Cart() {
       <div className="flex  ml-[250px] gap-x-[150px] flex-col ">
         <p className="text-xl font-semibold text-green-600">Your Cart</p>
         <h2 className="text-[14px] font-semibold text-green-600 ">Summary</h2>
-        <p className="text-[20ox] font-bold ">Total Items:3</p>
+        <p className="text-[20ox] font-bold ">Total Items:{totalItems}</p>
         <div className="mt-[150px]">
-          <p className="font-semibold text-[20px] ">Total Amount :-$500</p>
+          <p className="font-semibold text-[20px] ">Total Amount $:{totalAmount}</p>
           <button className="bg-green-700 px-[60px] font-bold py-2 rounded-md text-white hover:scale-110 transition-all duration-200 mt-4  ">
             Checkout Now
           </button>
